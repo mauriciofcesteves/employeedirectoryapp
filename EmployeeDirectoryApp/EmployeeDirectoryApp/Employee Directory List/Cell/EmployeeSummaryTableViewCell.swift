@@ -43,6 +43,8 @@ class EmployeeSummaryTableViewCell: UITableViewCell {
         if let biography = biography {
             self.biographyTextView.text = biography
         }
+        
+        biographyTextView.isUserInteractionEnabled = false
     }
     
     /** Apply shadow around the view. */
@@ -52,9 +54,9 @@ class EmployeeSummaryTableViewCell: UITableViewCell {
         self.containerView.clipsToBounds = true
         
         self.containerView.layer.shadowColor = UIColor.darkGray.cgColor
-        self.containerView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.containerView.layer.shadowOffsBouet = CGSize(width: 0, height: 0)
         self.containerView.layer.shadowRadius = 5
         self.containerView.layer.shadowOpacity = 0.1
-        self.containerView.layer.masksToBounds = false
+        self.containerView.layer.masksTonds = false
     }
 }
