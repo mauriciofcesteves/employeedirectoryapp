@@ -11,6 +11,10 @@ import UIKit
 /* EmployeeDirectoryListViewController is responsible to present employee data through an UITableView. */
 class EmployeeDirectoryListViewController: BaseViewController {
 
+    /* MARK: STATIC VARIABLES */
+    private static let tableViewHeaderHeight: CGFloat = 30
+    private static let tableViewRowHeight: CGFloat = 265
+    
     @IBOutlet weak var tableView: UITableView!
     
     public var employeesGroupByTeamDictionary: [String: [EmployeeModel]]?
@@ -30,8 +34,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        displayActivityIndicator(true)
+        requestData()
         
         // Do any additional setup after loading the view.
         self.emptyStateLabel.isHidden = true
@@ -44,6 +47,31 @@ class EmployeeDirectoryListViewController: BaseViewController {
         self.tableView.contentInset = UIEdgeInsets(top: -viewHeight, left: 0, bottom: 0, right: 0)
         
         tableView.register(UINib(nibName: "EmployeeSummaryTableViewCell", bundle: nil), forCellReuseIdentifier: "EmployeeSummaryTableViewCell")
+    }
+    
+    /**
+     * Request Employee data.
+     */
+    func requestData() {
+        displayActivityIndicator(true)
+
+        NetworkManager.shared.requestEmployeeData(completion: { [weak self] (success, data) -> Void in
+            DispatchQueue.main.async {
+                if success {
+                    if let data = data, !data.isEmpty {
+                        self?.employeesGroupByTeamDictionary = self?.buildEmployeeDictionaryGroupByTeam(data)
+                        self?.tableView.reloadData()
+                    } else {
+                        self?.setupEmptyState()
+                    }
+                } else {
+                    //error in the request (caused by malformed data)
+                    self?.setupErrorState()
+                }
+                
+                self?.displayActivityIndicator(false)
+            }
+        })
     }
     
     /* Setup empty state if there is no data to be presented. */
@@ -118,7 +146,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
 /* MARK: UITableViewDelegate */
 extension EmployeeDirectoryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 265
+        return EmployeeDirectoryListViewController.tableViewRowHeight
     }
 }
 
@@ -146,16 +174,6 @@ extension EmployeeDirectoryListViewController: UITableViewDataSource {
             
             cell.update(employee.fullName, employee.emailAddress, employee.employeeType?.toString(), formattingPhoneNumber(employee.phoneNumber), employee.biography, employee.largePhotoURL, employee.smallPhotoURL)
             
-            if let smallPhoto = employee.smallPhotoURL {
-                cell.employeePhotoImageView?.sd_setImage(with: URL(string: smallPhoto), completed: { (image, error, cache, urls) in
-                    if (error != nil) {
-                        cell.employeePhotoImageView.image = UIImage(named: "Placeholder")
-                    } else {
-                        cell.employeePhotoImageView?.image = image
-                    }
-                })
-            }
-            
             return cell
         }
         
@@ -181,7 +199,7 @@ extension EmployeeDirectoryListViewController: UITableViewDataSource {
     
     /* UITableView header height */
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return EmployeeDirectoryListViewController.tableViewHeaderHeight
     }
     
 }

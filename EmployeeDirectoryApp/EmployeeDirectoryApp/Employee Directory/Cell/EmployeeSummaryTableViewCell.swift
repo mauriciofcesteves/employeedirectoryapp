@@ -12,6 +12,9 @@ import SDWebImage
 /* EmployeeSummaryTableViewCell is responsible to present each employee summary inside a UITableView. */
 class EmployeeSummaryTableViewCell: UITableViewCell {
 
+    private static let photoCornerRadius: CGFloat = 50
+    private static let viewCornerRadius: CGFloat = 8
+    
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var employeePhotoImageView: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
@@ -24,9 +27,10 @@ class EmployeeSummaryTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        self.employeePhotoImageView.layer.cornerRadius = 50
-        self.containerView.layer.cornerRadius = 8
-        applyShadow(view: containerView)
+        self.employeePhotoImageView.layer.cornerRadius = EmployeeSummaryTableViewCell.photoCornerRadius
+        self.containerView.layer.cornerRadius = EmployeeSummaryTableViewCell.viewCornerRadius
+        
+        containerView.applyShadow()
     }
     
     func update(_ fullName: String?, _ emailAddress: String?, _ employeeType: String?, _ phoneNumber: String?, _ biography: String?, _ largePhotoURL: String?, _ smallPhotoURL: String?) {
@@ -44,19 +48,11 @@ class EmployeeSummaryTableViewCell: UITableViewCell {
             self.biographyTextView.text = biography
         }
         
+        if let photo = smallPhotoURL {
+            employeePhotoImageView?.sd_setImage(with: URL(string: photo))
+        }
+        
         biographyTextView.isUserInteractionEnabled = false
     }
     
-    /** Apply shadow around the view. */
-    func applyShadow(view: UIView) {
-        self.containerView.layer.borderWidth = 1.0
-        self.containerView.layer.borderColor = UIColor.clear.cgColor
-        self.containerView.clipsToBounds = true
-        
-        self.containerView.layer.shadowColor = UIColor.darkGray.cgColor
-        self.containerView.layer.shadowOffsBouet = CGSize(width: 0, height: 0)
-        self.containerView.layer.shadowRadius = 5
-        self.containerView.layer.shadowOpacity = 0.1
-        self.containerView.layer.masksTonds = false
-    }
 }

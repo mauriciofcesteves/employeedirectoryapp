@@ -11,11 +11,10 @@ import Foundation
 /* Manage the network callbacks. */
 public class NetworkManager {
     
-    /* MARK: STATIC ENDPOINTS */
-    static let ENDPOINT = "https://www.mocky.io/v2/5e135d053100007952d47771"
-    static let DELAY_ENDPOINT = "https://www.mocky.io/v2/5e135d053100007952d47771?mocky-delay=100ms"
+    /* MARK: ENDPOINTS */
+    static let endpoint = "https://www.mocky.io/v2/5e135d053100007952d47771"
+    static let delayEndpoint = "https://www.mocky.io/v2/5e135d053100007952d47771?mocky-delay=1000ms"
     
-    /* MARK: STATIC SINGLETON */
     static let shared = NetworkManager()
     
     public var employees: [EmployeeModel]?
@@ -24,7 +23,7 @@ public class NetworkManager {
     
     /* Fetch a list of Employees from an endpoint. */
     func requestEmployeeData(completion: @escaping (Bool, [EmployeeModel]?) -> ()) {
-        let urlString = NetworkManager.ENDPOINT
+        let urlString = NetworkManager.endpoint
         
         guard let url = URL(string: urlString) else {
             return
