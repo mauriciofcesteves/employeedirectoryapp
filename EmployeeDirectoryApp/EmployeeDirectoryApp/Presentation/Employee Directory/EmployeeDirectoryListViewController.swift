@@ -87,9 +87,10 @@ class EmployeeDirectoryListViewController: BaseViewController {
     /* Setup an error state if there is any connection problem. */
     func setupErrorState() {
         let alertController = UIAlertController(title: "Error", message: "Oops! Something went wrong. Please check your internet and try again later.", preferredStyle: .alert)
-        let mainAction = UIAlertAction(title: "Ok", style: .default, handler: { (alert) in
-            
+        let mainAction = UIAlertAction(title: "Try Again", style: .default, handler: { [weak self] (alert) in
+            self?.requestData()
         })
+        
         alertController.addAction(mainAction)
         self.present(alertController, animated: true, completion: nil)
     }
