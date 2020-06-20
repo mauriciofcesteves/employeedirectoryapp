@@ -11,11 +11,13 @@ import Foundation
 /* Manage the network callbacks. */
 public class NetworkManager {
     
-    /* MARK: STATIC ENDPOINTS */
-    static let ENDPOINT = "https://www.mocky.io/v2/5e135d053100007952d47771"
-    static let DELAY_ENDPOINT = "https://www.mocky.io/v2/5e135d053100007952d47771?mocky-delay=100ms"
+    /* MARK: ENDPOINTS */
+    static let endpoint = "https://run.mocky.io/v3/3a4ac9b3-65e0-443d-80da-950cf6e34523"
     
-    /* MARK: STATIC SINGLETON */
+    static let delayEndpoint = "https://run.mocky.io/v3/3a4ac9b3-65e0-443d-80da-950cf6e34523?mocky-delay=1000ms"
+    
+    static let malformedEndpoint = "https://run.mocky.io/v3/3a4ac9b3-65e0-443d-80da-950cf6e34523?callback=myfunction"
+    
     static let shared = NetworkManager()
     
     public var employees: [EmployeeModel]?
@@ -24,7 +26,7 @@ public class NetworkManager {
     
     /* Fetch a list of Employees from an endpoint. */
     func requestEmployeeData(completion: @escaping (Bool, [EmployeeModel]?) -> ()) {
-        let urlString = NetworkManager.ENDPOINT
+        let urlString = NetworkManager.endpoint
         
         guard let url = URL(string: urlString) else {
             return
@@ -55,7 +57,6 @@ public class NetworkManager {
                             if let currentEmployee = employee as? [String: Any] {
                                 let newEmployee = EmployeeModel(json: currentEmployee)
                                 
-                                //malformed employee should return error in the request
                                 if newEmployee.id.isEmpty {
                                     completion(false, nil)
                                     return

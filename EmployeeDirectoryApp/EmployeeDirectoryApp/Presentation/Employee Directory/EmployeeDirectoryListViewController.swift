@@ -11,6 +11,10 @@ import UIKit
 /* EmployeeDirectoryListViewController is responsible to present employee data through an UITableView. */
 class EmployeeDirectoryListViewController: BaseViewController {
 
+    /* MARK: STATIC VARIABLES */
+    private static let tableViewHeaderHeight: CGFloat = 30
+    private static let tableViewRowHeight: CGFloat = 170
+    
     @IBOutlet weak var tableView: UITableView!
     
     public var employeesGroupByTeamDictionary: [String: [EmployeeModel]]?
@@ -20,7 +24,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
         let label                                       = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font                                      = UIFont(name: "HelveticaNeue", size: 16)
-        label.textColor = UIColor(red: 155 / 255, green: 155 / 255, blue: 155 / 255, alpha: 1)
+        label.textColor = MasterSwatch.darkGray
         label.numberOfLines = 0
         label.text = "There are no employees to be presented."
         label.textAlignment = .center
@@ -30,8 +34,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        displayActivityIndicator(true)
+        requestData()
         
         // Do any additional setup after loading the view.
         self.emptyStateLabel.isHidden = true
@@ -44,6 +47,31 @@ class EmployeeDirectoryListViewController: BaseViewController {
         self.tableView.contentInset = UIEdgeInsets(top: -viewHeight, left: 0, bottom: 0, right: 0)
         
         tableView.register(UINib(nibName: "EmployeeSummaryTableViewCell", bundle: nil), forCellReuseIdentifier: "EmployeeSummaryTableViewCell")
+    }
+    
+    /**
+     * Request Employee data.
+     */
+    func requestData() {
+        displayActivityIndicator(true)
+
+        NetworkManager.shared.requestEmployeeData(completion: { [weak self] (success, data) -> Void in
+            DispatchQueue.main.async {
+                if success {
+                    if let data = data, !data.isEmpty {
+                        self?.employeesGroupByTeamDictionary = self?.buildEmployeeDictionaryGroupByTeam(data)
+                        self?.tableView.reloadData()
+                    } else {
+                        self?.setupEmptyState()
+                    }
+                } else {
+                    //error in the request (caused by malformed data)
+                    self?.setupErrorState()
+                }
+                
+                self?.displayActivityIndicator(false)
+            }
+        })
     }
     
     /* Setup empty state if there is no data to be presented. */
@@ -59,9 +87,10 @@ class EmployeeDirectoryListViewController: BaseViewController {
     /* Setup an error state if there is any connection problem. */
     func setupErrorState() {
         let alertController = UIAlertController(title: "Error", message: "Oops! Something went wrong. Please check your internet and try again later.", preferredStyle: .alert)
-        let mainAction = UIAlertAction(title: "Ok", style: .default, handler: { (alert) in
-            
+        let mainAction = UIAlertAction(title: "Try Again", style: .default, handler: { [weak self] (alert) in
+            self?.requestData()
         })
+        
         alertController.addAction(mainAction)
         self.present(alertController, animated: true, completion: nil)
     }
@@ -118,7 +147,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
 /* MARK: UITableViewDelegate */
 extension EmployeeDirectoryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 265
+        return EmployeeDirectoryListViewController.tableViewRowHeight
     }
 }
 
@@ -144,17 +173,8 @@ extension EmployeeDirectoryListViewController: UITableViewDataSource {
             //retrieve the current employee from the employee list
             let employee = employees[indexPath.item]
             
-            cell.update(employee.fullName, employee.emailAddress, employee.employeeType?.toString(), formattingPhoneNumber(employee.phoneNumber), employee.biography, employee.largePhotoURL, employee.smallPhotoURL)
-            
-            if let smallPhoto = employee.smallPhotoURL {
-                cell.employeePhotoImageView?.sd_setImage(with: URL(string: smallPhoto), completed: { (image, error, cache, urls) in
-                    if (error != nil) {
-                        cell.employeePhotoImageView.image = UIImage(named: "Placeholder")
-                    } else {
-                        cell.employeePhotoImageView?.image = image
-                    }
-                })
-            }
+            cell.delegate = self
+            cell.update(employee.fullName, employee.emailAddress, employee.employeeType?.toString(), formattingPhoneNumber(employee.phoneNumber), employee.largePhotoURL, employee.smallPhotoURL)
             
             return cell
         }
@@ -165,12 +185,12 @@ extension EmployeeDirectoryListViewController: UITableViewDataSource {
     /* Return the UITableView Header, grouped by Team. */
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UIView()
-        header.backgroundColor = UIColor(red: 249 / 255, green: 249 / 255, blue: 249 / 255, alpha: 1)
+        header.backgroundColor = MasterSwatch.black
         
         let teamLabel = UILabel(frame: CGRect(x: 15, y: 15, width:
             tableView.bounds.size.width, height: tableView.bounds.size.height))
         teamLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
-        teamLabel.textColor = UIColor(red: 48 / 255, green: 48 / 255, blue: 48 / 255, alpha: 1)
+        teamLabel.textColor = MasterSwatch.lightGray
         teamLabel.text = getEmployeeListBySection(section).first?.team
         teamLabel.sizeToFit()
         
@@ -181,7 +201,17 @@ extension EmployeeDirectoryListViewController: UITableViewDataSource {
     
     /* UITableView header height */
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return EmployeeDirectoryListViewController.tableViewHeaderHeight
     }
     
+}
+
+extension EmployeeDirectoryListViewController: EmployeeSummaryTableViewCellDelegate {
+    
+    func didTouchEmployeePhoto(photo: UIImage) {
+        let controller = EmployeeDialogViewController()
+        controller.modalTransitionStyle = .flipHorizontal
+        self.navigationController?.present(controller, animated: true)
+        controller.photoImageView?.image = photo
+    }
 }

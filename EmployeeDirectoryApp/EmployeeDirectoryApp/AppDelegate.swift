@@ -17,29 +17,6 @@ import UIKit
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //Request all employees when the app is launching
-        NetworkManager.shared.requestEmployeeData(completion: { [weak self] (success, data) -> Void in
-            if success {
-                //refresh the UI in the main queue
-                DispatchQueue.main.async {
-                    if let data = data, !data.isEmpty {
-                        self?.rootViewController.employeesGroupByTeamDictionary = self?.rootViewController.buildEmployeeDictionaryGroupByTeam(data)
-                        self?.rootViewController.tableView.reloadData()
-                    } else {
-                        self?.rootViewController.setupEmptyState()
-                    }
-                }
-            } else {
-                //error in the request (caused by malformed data)
-                self?.rootViewController.setupErrorState()
-            }
-            
-            //Hide activity indicator
-            DispatchQueue.main.async {
-                self?.rootViewController.displayActivityIndicator(false)
-            }
-        })
-        
         window = UIWindow()
         window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         window?.makeKeyAndVisible()

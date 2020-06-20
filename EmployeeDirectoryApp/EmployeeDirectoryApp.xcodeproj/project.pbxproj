@@ -26,6 +26,11 @@
 		B6517F9F23B95143009790BC /* EmployeeDirectoryListViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6517F9D23B95143009790BC /* EmployeeDirectoryListViewControllerTest.swift */; };
 		B6517FA123B99998009790BC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6517FA023B99998009790BC /* BaseViewController.swift */; };
 		B6517FA223B99998009790BC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6517FA023B99998009790BC /* BaseViewController.swift */; };
+		B69865A5249D7EB400FB2E3C /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69865A4249D7EB400FB2E3C /* UIView+Extensions.swift */; };
+		B69865A9249DA0B900FB2E3C /* MasterSwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69865A8249DA0B900FB2E3C /* MasterSwatch.swift */; };
+		B69865AA249E81A500FB2E3C /* MasterSwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69865A8249DA0B900FB2E3C /* MasterSwatch.swift */; };
+		B69865B0249E976500FB2E3C /* EmployeeDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69865AE249E976500FB2E3C /* EmployeeDialogViewController.swift */; };
+		B69865B1249E976500FB2E3C /* EmployeeDialogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B69865AF249E976500FB2E3C /* EmployeeDialogViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +62,10 @@
 		B6517F9623B6C6D8009790BC /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B6517F9D23B95143009790BC /* EmployeeDirectoryListViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDirectoryListViewControllerTest.swift; sourceTree = "<group>"; };
 		B6517FA023B99998009790BC /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		B69865A4249D7EB400FB2E3C /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		B69865A8249DA0B900FB2E3C /* MasterSwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterSwatch.swift; sourceTree = "<group>"; };
+		B69865AE249E976500FB2E3C /* EmployeeDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDialogViewController.swift; sourceTree = "<group>"; };
+		B69865AF249E976500FB2E3C /* EmployeeDialogViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeDialogViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,14 +127,14 @@
 		B6517F5A23B697C0009790BC /* EmployeeDirectoryApp */ = {
 			isa = PBXGroup;
 			children = (
-				B6517F9523B6C6C5009790BC /* Network */,
+				B69865A3249D7E2300FB2E3C /* Utilities */,
+				B6517F9523B6C6C5009790BC /* Networking */,
 				B6517F8D23B6A3A0009790BC /* Model */,
-				B6517F7F23B698BA009790BC /* Employee Directory List */,
+				B6517F7F23B698BA009790BC /* Presentation */,
 				B6517F5B23B697C0009790BC /* AppDelegate.swift */,
 				B6517F6523B697C3009790BC /* Assets.xcassets */,
 				B6517F6723B697C3009790BC /* LaunchScreen.storyboard */,
 				B6517F6A23B697C3009790BC /* Info.plist */,
-				B6517FA023B99998009790BC /* BaseViewController.swift */,
 			);
 			path = EmployeeDirectoryApp;
 			sourceTree = "<group>";
@@ -139,14 +148,15 @@
 			path = EmployeeDirectoryAppTests;
 			sourceTree = "<group>";
 		};
-		B6517F7F23B698BA009790BC /* Employee Directory List */ = {
+		B6517F7F23B698BA009790BC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				B6517F8623B69C81009790BC /* Cell */,
-				B6517F8023B699E8009790BC /* EmployeeDirectoryListViewController.swift */,
-				B6517F8123B699E8009790BC /* EmployeeDirectoryListViewController.xib */,
+				B69865AB249E969B00FB2E3C /* Employee Dialog */,
+				B69865A6249D9F6000FB2E3C /* Employee Directory */,
+				B6517FA023B99998009790BC /* BaseViewController.swift */,
+				B69865A8249DA0B900FB2E3C /* MasterSwatch.swift */,
 			);
-			path = "Employee Directory List";
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		B6517F8623B69C81009790BC /* Cell */ = {
@@ -166,12 +176,47 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		B6517F9523B6C6C5009790BC /* Network */ = {
+		B6517F9523B6C6C5009790BC /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				B6517F9623B6C6D8009790BC /* NetworkManager.swift */,
 			);
-			path = Network;
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		B69865A3249D7E2300FB2E3C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B69865A7249D9F8C00FB2E3C /* Extensions */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		B69865A6249D9F6000FB2E3C /* Employee Directory */ = {
+			isa = PBXGroup;
+			children = (
+				B6517F8623B69C81009790BC /* Cell */,
+				B6517F8023B699E8009790BC /* EmployeeDirectoryListViewController.swift */,
+				B6517F8123B699E8009790BC /* EmployeeDirectoryListViewController.xib */,
+			);
+			path = "Employee Directory";
+			sourceTree = "<group>";
+		};
+		B69865A7249D9F8C00FB2E3C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B69865A4249D7EB400FB2E3C /* UIView+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B69865AB249E969B00FB2E3C /* Employee Dialog */ = {
+			isa = PBXGroup;
+			children = (
+				B69865AE249E976500FB2E3C /* EmployeeDialogViewController.swift */,
+				B69865AF249E976500FB2E3C /* EmployeeDialogViewController.xib */,
+			);
+			path = "Employee Dialog";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +306,7 @@
 				B6517F6923B697C3009790BC /* LaunchScreen.storyboard in Resources */,
 				B6517F6623B697C3009790BC /* Assets.xcassets in Resources */,
 				B6517F8B23B69C9B009790BC /* EmployeeSummaryTableViewCell.xib in Resources */,
+				B69865B1249E976500FB2E3C /* EmployeeDialogViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,8 +368,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B69865A5249D7EB400FB2E3C /* UIView+Extensions.swift in Sources */,
 				B6517F9723B6C6D8009790BC /* NetworkManager.swift in Sources */,
 				B6517F8223B699E8009790BC /* EmployeeDirectoryListViewController.swift in Sources */,
+				B69865A9249DA0B900FB2E3C /* MasterSwatch.swift in Sources */,
+				B69865B0249E976500FB2E3C /* EmployeeDialogViewController.swift in Sources */,
 				B6517F5C23B697C0009790BC /* AppDelegate.swift in Sources */,
 				B6517F8F23B6A3B0009790BC /* EmployeeModel.swift in Sources */,
 				B6517F8923B69C9B009790BC /* EmployeeSummaryTableViewCell.swift in Sources */,
@@ -340,6 +389,7 @@
 				B6517F8A23B69C9B009790BC /* EmployeeSummaryTableViewCell.swift in Sources */,
 				B6517F9823B6C6D8009790BC /* NetworkManager.swift in Sources */,
 				B6517F9023B6A3B0009790BC /* EmployeeModel.swift in Sources */,
+				B69865AA249E81A500FB2E3C /* MasterSwatch.swift in Sources */,
 				B6517FA223B99998009790BC /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
