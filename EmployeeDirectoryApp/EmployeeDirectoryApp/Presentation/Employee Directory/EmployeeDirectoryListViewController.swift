@@ -13,7 +13,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
 
     /* MARK: STATIC VARIABLES */
     private static let tableViewHeaderHeight: CGFloat = 30
-    private static let tableViewRowHeight: CGFloat = 265
+    private static let tableViewRowHeight: CGFloat = 170
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -173,7 +173,8 @@ extension EmployeeDirectoryListViewController: UITableViewDataSource {
             //retrieve the current employee from the employee list
             let employee = employees[indexPath.item]
             
-            cell.update(employee.fullName, employee.emailAddress, employee.employeeType?.toString(), formattingPhoneNumber(employee.phoneNumber), employee.biography, employee.largePhotoURL, employee.smallPhotoURL)
+            cell.delegate = self
+            cell.update(employee.fullName, employee.emailAddress, employee.employeeType?.toString(), formattingPhoneNumber(employee.phoneNumber), employee.largePhotoURL, employee.smallPhotoURL)
             
             return cell
         }
@@ -203,4 +204,14 @@ extension EmployeeDirectoryListViewController: UITableViewDataSource {
         return EmployeeDirectoryListViewController.tableViewHeaderHeight
     }
     
+}
+
+extension EmployeeDirectoryListViewController: EmployeeSummaryTableViewCellDelegate {
+    
+    func didTouchEmployeePhoto(photo: UIImage) {
+        let controller = EmployeeDialogViewController()
+        controller.modalTransitionStyle = .flipHorizontal
+        self.navigationController?.present(controller, animated: true)
+        controller.photoImageView?.image = photo
+    }
 }

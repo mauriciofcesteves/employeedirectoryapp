@@ -11,7 +11,7 @@ import UIKit
 extension UIView {
     
     /** Apply shadow around the view. */
-    func applyShadow() {
+    public func applyShadow() {
         self.layer.borderWidth = 1.0
         self.layer.borderColor = UIColor.clear.cgColor
         self.clipsToBounds = true

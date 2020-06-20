@@ -12,8 +12,11 @@ import Foundation
 public class NetworkManager {
     
     /* MARK: ENDPOINTS */
-    static let endpoint = "https://www.mocky.io/v2/5e135d053100007952d47771"
-    static let delayEndpoint = "https://www.mocky.io/v2/5e135d053100007952d47771?mocky-delay=1000ms"
+    static let endpoint = "https://run.mocky.io/v3/3a4ac9b3-65e0-443d-80da-950cf6e34523"
+    
+    static let delayEndpoint = "https://run.mocky.io/v3/3a4ac9b3-65e0-443d-80da-950cf6e34523?mocky-delay=1000ms"
+    
+    static let malformedEndpoint = "https://run.mocky.io/v3/3a4ac9b3-65e0-443d-80da-950cf6e34523?callback=myfunction"
     
     static let shared = NetworkManager()
     
@@ -54,7 +57,6 @@ public class NetworkManager {
                             if let currentEmployee = employee as? [String: Any] {
                                 let newEmployee = EmployeeModel(json: currentEmployee)
                                 
-                                //malformed employee should return error in the request
                                 if newEmployee.id.isEmpty {
                                     completion(false, nil)
                                     return
