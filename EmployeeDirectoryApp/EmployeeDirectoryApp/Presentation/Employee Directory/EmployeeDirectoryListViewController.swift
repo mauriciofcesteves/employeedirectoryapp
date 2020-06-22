@@ -26,7 +26,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
         label.font                                      = UIFont(name: "HelveticaNeue", size: 16)
         label.textColor = MasterSwatch.darkGray
         label.numberOfLines = 0
-        label.text = "There are no employees to be presented."
+        label.text = "Employee.EmptyState".localize()
         label.textAlignment = .center
         
         return label

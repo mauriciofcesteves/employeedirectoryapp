@@ -31,6 +31,9 @@
 		B69865AA249E81A500FB2E3C /* MasterSwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69865A8249DA0B900FB2E3C /* MasterSwatch.swift */; };
 		B69865B0249E976500FB2E3C /* EmployeeDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69865AE249E976500FB2E3C /* EmployeeDialogViewController.swift */; };
 		B69865B1249E976500FB2E3C /* EmployeeDialogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B69865AF249E976500FB2E3C /* EmployeeDialogViewController.xib */; };
+		B69865B424A15CC000FB2E3C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B69865B324A15CC000FB2E3C /* Localizable.strings */; };
+		B69865B724A15FAB00FB2E3C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69865B624A15FAB00FB2E3C /* String+Extensions.swift */; };
+		B69865BA24A161FD00FB2E3C /* Portuguese.strings in Resources */ = {isa = PBXBuildFile; fileRef = B69865BC24A161FD00FB2E3C /* Portuguese.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,10 @@
 		B69865A8249DA0B900FB2E3C /* MasterSwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterSwatch.swift; sourceTree = "<group>"; };
 		B69865AE249E976500FB2E3C /* EmployeeDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDialogViewController.swift; sourceTree = "<group>"; };
 		B69865AF249E976500FB2E3C /* EmployeeDialogViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmployeeDialogViewController.xib; sourceTree = "<group>"; };
+		B69865B224A15BA400FB2E3C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		B69865B324A15CC000FB2E3C /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		B69865B624A15FAB00FB2E3C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		B69865BB24A161FD00FB2E3C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Portuguese.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,12 +134,12 @@
 		B6517F5A23B697C0009790BC /* EmployeeDirectoryApp */ = {
 			isa = PBXGroup;
 			children = (
+				B69865B524A15F7000FB2E3C /* Resources */,
 				B69865A3249D7E2300FB2E3C /* Utilities */,
 				B6517F9523B6C6C5009790BC /* Networking */,
 				B6517F8D23B6A3A0009790BC /* Model */,
 				B6517F7F23B698BA009790BC /* Presentation */,
 				B6517F5B23B697C0009790BC /* AppDelegate.swift */,
-				B6517F6523B697C3009790BC /* Assets.xcassets */,
 				B6517F6723B697C3009790BC /* LaunchScreen.storyboard */,
 				B6517F6A23B697C3009790BC /* Info.plist */,
 			);
@@ -206,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				B69865A4249D7EB400FB2E3C /* UIView+Extensions.swift */,
+				B69865B624A15FAB00FB2E3C /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -217,6 +225,16 @@
 				B69865AF249E976500FB2E3C /* EmployeeDialogViewController.xib */,
 			);
 			path = "Employee Dialog";
+			sourceTree = "<group>";
+		};
+		B69865B524A15F7000FB2E3C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B69865B324A15CC000FB2E3C /* Localizable.strings */,
+				B6517F6523B697C3009790BC /* Assets.xcassets */,
+				B69865BC24A161FD00FB2E3C /* Portuguese.strings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +303,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = B6517F4F23B697BF009790BC;
 			productRefGroup = B6517F5923B697C0009790BC /* Products */;
@@ -303,10 +322,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6517F8423B699E8009790BC /* EmployeeDirectoryListViewController.xib in Resources */,
+				B69865B424A15CC000FB2E3C /* Localizable.strings in Resources */,
 				B6517F6923B697C3009790BC /* LaunchScreen.storyboard in Resources */,
 				B6517F6623B697C3009790BC /* Assets.xcassets in Resources */,
 				B6517F8B23B69C9B009790BC /* EmployeeSummaryTableViewCell.xib in Resources */,
 				B69865B1249E976500FB2E3C /* EmployeeDialogViewController.xib in Resources */,
+				B69865BA24A161FD00FB2E3C /* Portuguese.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B69865B724A15FAB00FB2E3C /* String+Extensions.swift in Sources */,
 				B69865A5249D7EB400FB2E3C /* UIView+Extensions.swift in Sources */,
 				B6517F9723B6C6D8009790BC /* NetworkManager.swift in Sources */,
 				B6517F8223B699E8009790BC /* EmployeeDirectoryListViewController.swift in Sources */,
@@ -409,8 +431,17 @@
 			isa = PBXVariantGroup;
 			children = (
 				B6517F6823B697C3009790BC /* Base */,
+				B69865B224A15BA400FB2E3C /* pt-BR */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B69865BC24A161FD00FB2E3C /* Portuguese.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B69865BB24A161FD00FB2E3C /* pt-BR */,
+			);
+			name = Portuguese.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -420,6 +451,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -481,6 +513,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
