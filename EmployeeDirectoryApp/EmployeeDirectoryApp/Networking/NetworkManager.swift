@@ -12,11 +12,11 @@ import Foundation
 public class NetworkManager {
     
     /* MARK: ENDPOINTS */
-    static let endpoint = "https://run.mocky.io/v3/3a4ac9b3-65e0-443d-80da-950cf6e34523"
+    static let endpoint = "https://run.mocky.io/v3/000c0dda-bbaf-4d52-9e1a-58d3a11e912b"
     
-    static let delayEndpoint = "https://run.mocky.io/v3/3a4ac9b3-65e0-443d-80da-950cf6e34523?mocky-delay=1000ms"
+    static let delayEndpoint = "https://run.mocky.io/v3/000c0dda-bbaf-4d52-9e1a-58d3a11e912b?mocky-delay=1000ms"
     
-    static let malformedEndpoint = "https://run.mocky.io/v3/3a4ac9b3-65e0-443d-80da-950cf6e34523?callback=myfunction"
+    static let malformedEndpoint = "https://run.mocky.io/v3/000c0dda-bbaf-4d52-9e1a-58d3a11e912b?callback=myfunction"
     
     static let shared = NetworkManager()
     

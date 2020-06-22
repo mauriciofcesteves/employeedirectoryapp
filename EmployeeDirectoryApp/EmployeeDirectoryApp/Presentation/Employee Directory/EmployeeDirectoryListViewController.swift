@@ -34,11 +34,10 @@ class EmployeeDirectoryListViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestData()
         
         // Do any additional setup after loading the view.
-        self.emptyStateLabel.isHidden = true
-        self.view.addSubview(emptyStateLabel)
+        requestData()
+        
         self.navigationController?.isNavigationBarHidden = true
         
         //stick the header to the tableView while scrolling
@@ -76,6 +75,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
     
     /* Setup empty state if there is no data to be presented. */
     func setupEmptyState() {
+        self.view.addSubview(emptyStateLabel)
         self.emptyStateLabel.isHidden = false
         
         NSLayoutConstraint.activate([
@@ -112,15 +112,12 @@ class EmployeeDirectoryListViewController: BaseViewController {
     func buildEmployeeDictionaryGroupByTeam(_ employeeList: [EmployeeModel]) -> [String: [EmployeeModel]]? {
         var result = [String: [EmployeeModel]]()
         
-        //iterates over the list of sorted employees
         for employee in employeeList.sorted(by: {$0.fullName < $1.fullName}) {
             
-            //check if is the first time adding the team to the dictionary
             if result[employee.team] == nil {
                 result[employee.team] = [EmployeeModel]()
             }
             
-            //add the employee by team name
             result[employee.team]?.append(employee)
         }
         
