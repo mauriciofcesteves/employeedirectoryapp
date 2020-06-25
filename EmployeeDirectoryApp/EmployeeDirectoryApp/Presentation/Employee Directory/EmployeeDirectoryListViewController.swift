@@ -14,6 +14,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
     /* MARK: STATIC VARIABLES */
     private static let tableViewHeaderHeight: CGFloat = 30
     private static let tableViewRowHeight: CGFloat = 170
+    private static let employeeSummaryTableViewCell = "EmployeeSummaryTableViewCell"
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -45,7 +46,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
         self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: viewHeight))
         self.tableView.contentInset = UIEdgeInsets(top: -viewHeight, left: 0, bottom: 0, right: 0)
         
-        tableView.register(UINib(nibName: "EmployeeSummaryTableViewCell", bundle: nil), forCellReuseIdentifier: "EmployeeSummaryTableViewCell")
+        tableView.register(UINib(nibName: EmployeeDirectoryListViewController.employeeSummaryTableViewCell, bundle: nil), forCellReuseIdentifier: EmployeeDirectoryListViewController.employeeSummaryTableViewCell)
     }
     
     /**
@@ -163,7 +164,7 @@ extension EmployeeDirectoryListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "EmployeeSummaryTableViewCell") as? EmployeeSummaryTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: EmployeeDirectoryListViewController.employeeSummaryTableViewCell) as? EmployeeSummaryTableViewCell {
             
             //retrieve the employee given the section
             let employees = getEmployeeListBySection(indexPath.section)

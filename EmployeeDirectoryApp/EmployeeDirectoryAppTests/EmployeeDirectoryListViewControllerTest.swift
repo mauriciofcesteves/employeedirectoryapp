@@ -15,7 +15,7 @@ import XCTest
  */
 class EmployeeDirectoryListViewControllerTest: XCTestCase {
     
-    fileprivate var viewController: EmployeeDirectoryListViewController?
+    private var viewController: EmployeeDirectoryListViewController?
     
     override func setUp() {
         viewController = EmployeeDirectoryListViewController()
