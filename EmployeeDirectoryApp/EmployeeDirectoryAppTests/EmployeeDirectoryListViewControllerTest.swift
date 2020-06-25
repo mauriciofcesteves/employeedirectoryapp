@@ -41,7 +41,7 @@ class EmployeeDirectoryListViewControllerTest: XCTestCase {
         let employees = [employee1, employee2, employee3]
         
         //Step 2.
-        let resultDictionary = viewController?.buildEmployeeDictionaryGroupByTeam(employees)
+        let resultDictionary = NetworkManager.shared.buildEmployeeDictionaryGroupByTeam(employees)
         
         //Step 3.
         guard let result = resultDictionary else {
@@ -77,7 +77,7 @@ class EmployeeDirectoryListViewControllerTest: XCTestCase {
         let employees = [employee1, employee2, employee3]
         
         //Step 2.
-        let resultDictionary = viewController?.buildEmployeeDictionaryGroupByTeam(employees)
+        let resultDictionary = NetworkManager.shared.buildEmployeeDictionaryGroupByTeam(employees)
         
         //Step 3.
         guard let result = resultDictionary else {
@@ -143,7 +143,7 @@ class EmployeeDirectoryListViewControllerTest: XCTestCase {
         
         let employees = [employee1, employee2, employee3]
         
-        let resultDictionary = viewController?.buildEmployeeDictionaryGroupByTeam(employees)
+        let resultDictionary = NetworkManager.shared.buildEmployeeDictionaryGroupByTeam(employees)
         viewController?.employeesGroupByTeamDictionary = resultDictionary
         
         //Step 2.

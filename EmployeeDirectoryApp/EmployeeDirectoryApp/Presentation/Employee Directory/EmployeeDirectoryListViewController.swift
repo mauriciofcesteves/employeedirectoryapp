@@ -59,7 +59,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
             DispatchQueue.main.async {
                 if success {
                     if let data = data, !data.isEmpty {
-                        self?.employeesGroupByTeamDictionary = self?.buildEmployeeDictionaryGroupByTeam(data)
+                        self?.employeesGroupByTeamDictionary = data
                         self?.tableView.reloadData()
                     } else {
                         self?.setupEmptyState()
@@ -104,25 +104,6 @@ class EmployeeDirectoryListViewController: BaseViewController {
         }
         
         return nil
-    }
-    
-    /*
-     * Gets a list of employee as an input, iterate over it and organize it grouped by team.
-     * Return a dictionary that has team name as key and a list of employee as value.
-     */
-    func buildEmployeeDictionaryGroupByTeam(_ employeeList: [EmployeeModel]) -> [String: [EmployeeModel]]? {
-        var result = [String: [EmployeeModel]]()
-        
-        for employee in employeeList.sorted(by: {$0.fullName < $1.fullName}) {
-            
-            if result[employee.team] == nil {
-                result[employee.team] = [EmployeeModel]()
-            }
-            
-            result[employee.team]?.append(employee)
-        }
-        
-        return result
     }
     
     /** Return the employee list based on the given section. */
