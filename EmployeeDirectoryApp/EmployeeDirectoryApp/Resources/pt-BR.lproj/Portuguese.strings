@@ -5,3 +5,4 @@
   Created by Mauricio Esteves on 2020-06-22.
   Copyright © 2020 personal. All rights reserved.
 */
+"Employee.EmptyState" = "Nenhum funcionário encontrado.";

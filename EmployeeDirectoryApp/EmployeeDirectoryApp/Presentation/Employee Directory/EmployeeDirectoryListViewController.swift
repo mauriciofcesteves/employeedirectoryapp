@@ -14,6 +14,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
     /* MARK: STATIC VARIABLES */
     private static let tableViewHeaderHeight: CGFloat = 30
     private static let tableViewRowHeight: CGFloat = 170
+    private static let employeeSummaryTableViewCell = "EmployeeSummaryTableViewCell"
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -45,7 +46,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
         self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: viewHeight))
         self.tableView.contentInset = UIEdgeInsets(top: -viewHeight, left: 0, bottom: 0, right: 0)
         
-        tableView.register(UINib(nibName: "EmployeeSummaryTableViewCell", bundle: nil), forCellReuseIdentifier: "EmployeeSummaryTableViewCell")
+        tableView.register(UINib(nibName: EmployeeDirectoryListViewController.employeeSummaryTableViewCell, bundle: nil), forCellReuseIdentifier: EmployeeDirectoryListViewController.employeeSummaryTableViewCell)
     }
     
     /**
@@ -58,7 +59,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
             DispatchQueue.main.async {
                 if success {
                     if let data = data, !data.isEmpty {
-                        self?.employeesGroupByTeamDictionary = self?.buildEmployeeDictionaryGroupByTeam(data)
+                        self?.employeesGroupByTeamDictionary = data
                         self?.tableView.reloadData()
                     } else {
                         self?.setupEmptyState()
@@ -105,25 +106,6 @@ class EmployeeDirectoryListViewController: BaseViewController {
         return nil
     }
     
-    /*
-     * Gets a list of employee as an input, iterate over it and organize it grouped by team.
-     * Return a dictionary that has team name as key and a list of employee as value.
-     */
-    func buildEmployeeDictionaryGroupByTeam(_ employeeList: [EmployeeModel]) -> [String: [EmployeeModel]]? {
-        var result = [String: [EmployeeModel]]()
-        
-        for employee in employeeList.sorted(by: {$0.fullName < $1.fullName}) {
-            
-            if result[employee.team] == nil {
-                result[employee.team] = [EmployeeModel]()
-            }
-            
-            result[employee.team]?.append(employee)
-        }
-        
-        return result
-    }
-    
     /** Return the employee list based on the given section. */
     func getEmployeeListBySection(_ section: Int) -> [EmployeeModel] {
         
@@ -163,7 +145,7 @@ extension EmployeeDirectoryListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "EmployeeSummaryTableViewCell") as? EmployeeSummaryTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: EmployeeDirectoryListViewController.employeeSummaryTableViewCell) as? EmployeeSummaryTableViewCell {
             
             //retrieve the employee given the section
             let employees = getEmployeeListBySection(indexPath.section)

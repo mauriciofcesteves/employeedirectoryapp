@@ -34,6 +34,7 @@
 		B69865B424A15CC000FB2E3C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B69865B324A15CC000FB2E3C /* Localizable.strings */; };
 		B69865B724A15FAB00FB2E3C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69865B624A15FAB00FB2E3C /* String+Extensions.swift */; };
 		B69865BA24A161FD00FB2E3C /* Portuguese.strings in Resources */ = {isa = PBXBuildFile; fileRef = B69865BC24A161FD00FB2E3C /* Portuguese.strings */; };
+		B69865BF24A423E300FB2E3C /* EmployeeDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69865AE249E976500FB2E3C /* EmployeeDialogViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -410,6 +411,7 @@
 				B6517F8323B699E8009790BC /* EmployeeDirectoryListViewController.swift in Sources */,
 				B6517F8A23B69C9B009790BC /* EmployeeSummaryTableViewCell.swift in Sources */,
 				B6517F9823B6C6D8009790BC /* NetworkManager.swift in Sources */,
+				B69865BF24A423E300FB2E3C /* EmployeeDialogViewController.swift in Sources */,
 				B6517F9023B6A3B0009790BC /* EmployeeModel.swift in Sources */,
 				B69865AA249E81A500FB2E3C /* MasterSwatch.swift in Sources */,
 				B6517FA223B99998009790BC /* BaseViewController.swift in Sources */,

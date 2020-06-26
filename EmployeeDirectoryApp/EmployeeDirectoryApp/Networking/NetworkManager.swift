@@ -14,7 +14,7 @@ public class NetworkManager {
     /* MARK: ENDPOINTS */
     static let endpoint = "https://run.mocky.io/v3/000c0dda-bbaf-4d52-9e1a-58d3a11e912b"
     
-    static let delayEndpoint = "https://run.mocky.io/v3/000c0dda-bbaf-4d52-9e1a-58d3a11e912b?mocky-delay=1000ms"
+    static let delayEndpoint = "https://run.mocky.io/v3/000c0dda-bbaf-4d52-9e1a-58d3a11e912b?mocky-delay=4000ms"
     
     static let malformedEndpoint = "https://run.mocky.io/v3/000c0dda-bbaf-4d52-9e1a-58d3a11e912b?callback=myfunction"
     
@@ -25,7 +25,7 @@ public class NetworkManager {
     private init() {}
     
     /* Fetch a list of Employees from an endpoint. */
-    func requestEmployeeData(completion: @escaping (Bool, [EmployeeModel]?) -> ()) {
+    func requestEmployeeData(completion: @escaping (Bool, [String: [EmployeeModel]]?) -> ()) {
         let urlString = NetworkManager.endpoint
         
         guard let url = URL(string: urlString) else {
@@ -66,7 +66,7 @@ public class NetworkManager {
                             }
                         }
                         
-                        completion(true, self.employees)
+                        completion(true, self.buildEmployeeDictionaryGroupByTeam(self.employees ?? []))
                     }
                 }
             } catch {
@@ -77,5 +77,24 @@ public class NetworkManager {
             
             }.resume()
         //End of URLSession implementation
+    }
+    
+    /*
+     * Gets a list of employee as an input, iterate over it and organize it grouped by team.
+     * Return a dictionary that has team name as key and a list of employee as value.
+     */
+    func buildEmployeeDictionaryGroupByTeam(_ employeeList: [EmployeeModel]) -> [String: [EmployeeModel]]? {
+        var result = [String: [EmployeeModel]]()
+        
+        for employee in employeeList.sorted(by: {$0.fullName < $1.fullName}) {
+            
+            if result[employee.team] == nil {
+                result[employee.team] = [EmployeeModel]()
+            }
+            
+            result[employee.team]?.append(employee)
+        }
+        
+        return result
     }
 }
