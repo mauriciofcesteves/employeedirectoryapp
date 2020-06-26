@@ -55,7 +55,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
     func requestData() {
         displayActivityIndicator(true)
 
-        NetworkManager.shared.requestEmployeeData(completion: { [weak self] (success, data) -> Void in
+        NetworkManager.shared.requestEmployeeData { [weak self] (success, data) -> Void in
             DispatchQueue.main.async {
                 if success {
                     if let data = data, !data.isEmpty {
@@ -71,7 +71,7 @@ class EmployeeDirectoryListViewController: BaseViewController {
                 
                 self?.displayActivityIndicator(false)
             }
-        })
+        }
     }
     
     /* Setup empty state if there is no data to be presented. */
